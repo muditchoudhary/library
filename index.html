@@ -10,13 +10,40 @@
 </head>
 
 <body>
+    <div class="user-input-form">
+        <form action="" method="get">
+            <p>
+                <h2>New Book</h2>
+                <img src="Assets/Icon/cancel-svgrepo-com.svg" alt="Cancel Icon">
+            </p>
+            <p>
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" required>
+            </p>
+            <p>
+                <label for="author">Author</label>
+                <input type="text" name="author" id="author" required>
+            </p>
+            <p>
+                <label for="pages">Pages</label>
+                <input type="number" name="pages" id="pages" required>
+            </p>
+            <p>
+                <label for="read">Read</label>
+                <input type="radio" name="status" id="read" required>
+                <label for="not-read">Not read</label>
+                <input type="radio" name="status" id="not-read" required>
+            </p>
+            <button type="submit">Done</button>
+        </form>
+    </div>
     <div class="bookshelf">
         <div class="shelf-header">
             <h1>
                 <img src="Assets/Logo/library-14-svgrepo-com.svg" class="logo" alt="Library logo">
                 LIBRARY
             </h1>
-            <img src="Assets/Icon/add-symbol-svgrepo-com.svg" class="icon" alt="Add Icon">
+            <img src="Assets/Icon/add-symbol-svgrepo-com.svg" class="icon add-btn" alt="Add Icon">
         </div>
         <div class="shelf-body">
             <div class="row">
@@ -27,7 +54,7 @@
                 <h4>Status</h4>
                 <img src="Assets/Icon/delete-svgrepo-com.svg" class="icon" alt="Delete Icon">
             </div>
-            <div class="row">
+            <div class="book">
                 <img src="/Assets/Icon/book-svgrepo-com.svg" alt="Book Icon">
                 <span class="title">The Hobbit</span>
                 <span class="author">J.R.R Tolkein</span>
