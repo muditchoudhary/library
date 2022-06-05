@@ -13,8 +13,8 @@
     <div class="user-input-form">
         <form action="" method="get">
             <p>
-                <h2>New Book</h2>
-                <img src="Assets/Icon/cancel-svgrepo-com.svg" alt="Cancel Icon">
+                <span>Add New Book</span>
+                <img src="Assets/Icon/cancel-svgrepo-com.svg" alt="Cancel Icon" class="icon">
             </p>
             <p>
                 <label for="title">Title</label>
@@ -29,10 +29,13 @@
                 <input type="number" name="pages" id="pages" required>
             </p>
             <p>
-                <label for="read">Read</label>
-                <input type="radio" name="status" id="read" required>
-                <label for="not-read">Not read</label>
-                <input type="radio" name="status" id="not-read" required>
+                <label for="">Status</label>
+                <span class="status-option">
+                    <label for="read">Read</label>
+                    <input type="radio" name="status" id="read" required>
+                    <label for="not-read">Not read</label>
+                    <input type="radio" name="status" id="not-read" required>
+                </span>
             </p>
             <button type="submit">Done</button>
         </form>

@@ -152,6 +152,41 @@ body {
 
 .user-input-form {
   position: absolute;
+  width: 75%;
+  background: beige;
+  height: 350px;
+  border-radius: 20px;
+}
+
+form p {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+form p span.status-option {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+form p:first-child {
+  display: grid;
+  grid-template-columns: 1fr 50px;
+}
+
+form p:first-child span {
+  font-size: 35px;
+  font-weight: 900;
+  align-self: center;
+  justify-self: center;
+}
+
+
+label {
+  font-size: 23px;
+}
+
+input {
+  font-size: 22px;
+  align-self: center;
 }
 
 .bookshelf {
