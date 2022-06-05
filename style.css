@@ -142,6 +142,7 @@ table {
   height: auto;
   justify-self: end;
   align-self: center;
+  cursor: pointer;
 }
 
 body {
@@ -151,6 +152,7 @@ body {
 }
 
 .user-input-form {
+  display: none;
   position: absolute;
   width: 75%;
   background: beige;
