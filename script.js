@@ -23,6 +23,10 @@ function addBookToLibrary() {
     const book = new Book(title, author, pages, status);
 // Store the book object into the array
     myLibrary.push(book);
+
+    for(let i = 0; i < myLibrary.length; i++) {
+        displaybook(myLibrary[i]);
+    }
 }
 
 function submitForm() {
@@ -66,9 +70,44 @@ function clearRadioValues(arr) {
     }
 }
 
-function displaybook() {
-    // Loop through each book
-    // Display books in a formatted way
+function displaybook(book) {
+    const bookRow = document.createElement('div');
+    const bookIcon = document.createElement('IMG');
+    const deleteIcon = document.createElement('IMG');
+    const spans = [];
+    for(let i = 0; i < 4; i++) {
+        spans.push(document.createElement('span'));
+    }
+
+    bookRow.classList.add('book');
+
+    bookIcon.src = "/Assets/Icon/book-svgrepo-com.svg";
+    bookIcon.alt = 'Book Icon';
+    bookIcon.classList.add('book-icon');
+    
+    deleteIcon.src = "Assets/Icon/delete-svgrepo-com.svg";
+    deleteIcon.alt = 'Delete Icon';
+    deleteIcon.classList.add = 'icon';
+
+    spanClasess = ['title', 'author', 'pages', 'status'];
+    j = 0;
+    for (let key in book) {
+        spans[j].classList.add = spanClasess[j];
+        spans[j].textContent = book[key];
+        j++;
+    }
+
+    bookRowChilds = [bookIcon];
+    spans.forEach(span => {
+        bookRowChilds.push(span);
+    });
+    bookRowChilds.push(deleteIcon);
+
+    for(let i = 0; i < bookRowChilds.length; i++) {
+        bookRow.appendChild(bookRowChilds[i]);
+    }
+
+    bookShelfBody.appendChild(bookRow);
 }
 
 function showInputForm() {
@@ -99,3 +138,4 @@ submitBtn.addEventListener('click', submitForm);
 
 
 const bookInputForm = document.querySelector('.user-input-form');
+const bookShelfBody = document.querySelector('.shelf-body');
