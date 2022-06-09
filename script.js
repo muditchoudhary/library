@@ -1,11 +1,10 @@
 // Global Variables
 let myLibrary = [];
 let values = [];
-inputIds = ['title', 'author', 'pages'];
+inputFieldIds = ['title', 'author', 'pages'];
 radioIds = ['read', 'not-read'];
 
 function Book(title, author, pages, status) {
-  // the constructor...
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -13,38 +12,33 @@ function Book(title, author, pages, status) {
 }
 
 function addBookToLibrary() {
-    //   Take user input for the book
     const title = values[0];
     const author = values[1];
     const pages = values[2];
     const status = values[3];
     values = [];
-    // Creating new object of book
+
     const book = new Book(title, author, pages, status);
-// Store the book object into the array
     myLibrary.push(book);
 
-    for(let i = 0; i < myLibrary.length; i++) {
-        displaybook(myLibrary[i]);
-    }
+    displaybook(myLibrary[myLibrary.length - 1]);
 }
 
 function submitForm() {
-    // Query all the values from input tags and store in values variable
-    getInputTextValues(inputIds);
+    getInputTextValues(inputFieldIds);
     checkReadStatus();
     // Clear all the values from input tags
     // It's temporarly because submitting from reloades
     //  the page, myLibrary array gets reset.
-    clearInputTextValues(inputIds);
+    clearInputTextValues(inputFieldIds);
     clearRadioValues(radioIds);
 
     addBookToLibrary();
 }
 
-function getInputTextValues(arr) {
-    for (i in arr) {
-        const value = document.querySelector(`#${arr[i]}`).value;
+function getInputTextValues(arrOfInputIds) {
+    for (i in arrOfInputIds) {
+        const value = document.querySelector(`#${arrOfInputIds[i]}`).value;
         values.push(value);
     }
 }
@@ -80,19 +74,22 @@ function displaybook(book) {
     }
 
     bookRow.classList.add('book');
+    bookRow.setAttribute('data-index', `${myLibrary.indexOf(myLibrary[myLibrary.length -1])}`)
 
-    bookIcon.src = "/Assets/Icon/book-svgrepo-com.svg";
+    bookIcon.src = "Assets/Icon/book-svgrepo-com.svg";
     bookIcon.alt = 'Book Icon';
     bookIcon.classList.add('book-icon');
     
     deleteIcon.src = "Assets/Icon/delete-svgrepo-com.svg";
     deleteIcon.alt = 'Delete Icon';
-    deleteIcon.classList.add = 'icon';
+    deleteIcon.classList.add('icon');
+    deleteIcon.classList.add('remove');
+    deleteIcon.addEventListener('click', removeBook);
 
     spanClasess = ['title', 'author', 'pages', 'status'];
     j = 0;
     for (let key in book) {
-        spans[j].classList.add = spanClasess[j];
+        spans[j].classList.add(spanClasess[j]);
         spans[j].textContent = book[key];
         j++;
     }
@@ -111,18 +108,37 @@ function displaybook(book) {
 }
 
 function showInputForm() {
-    // Unhide input form
     bookInputForm.style.display = 'block';
 }
 
 function hideInputForm() {
-    // Hide input form
-    clearInputTextValues(inputIds);
+    clearInputTextValues(inputFieldIds);
     clearRadioValues(radioIds);
     bookInputForm.style.display = 'none';
 }
 
-// Button to add new books
+function removeBook(e) {
+    const bookDataAttributeIndex = e.path[1].getAttribute('data-index');
+    const bookRow = e.path[1];
+    bookRow.remove();
+
+    myLibrary.splice(parseInt(bookDataAttributeIndex), 1);
+
+
+    // The for loop is for matching data-index value of remaining book divs
+    // with the book objects index on myLibrary. 
+    // As if a book removes from the middle of an array, book's object index
+    // on myLibrary changed but there corrosponding book div's data-index value
+    // doesn't changes
+    const bookDivNodes = document.querySelectorAll('.book');
+    for (let i = 0; i < bookDivNodes.length; i++) {
+        bookDivNodes[i].setAttribute('data-index', `${i}`);
+    }
+
+    console.log(myLibrary);
+}
+
+
 const addBookBtn = document.querySelector('.add-btn');
 addBookBtn.addEventListener('click', showInputForm);
 
@@ -131,11 +147,16 @@ closeFromBtn.addEventListener('click', hideInputForm);
 
 const submitBtn = document.querySelector('.submit');
 submitBtn.addEventListener('click', submitForm);
-// Button on book display to remove a book
-// Need to assiociate actual book with dom with data atribute
+
+const removeBookBtns = document.querySelectorAll('.remove');
+removeBookBtns.forEach(btn => btn.addEventListener('click', removeBook));
 // Button on book display to change book read status
 // function to change that book object read status
 
 
 const bookInputForm = document.querySelector('.user-input-form');
 const bookShelfBody = document.querySelector('.shelf-body');
+
+const defaultBook = new Book('The Hobbit', 'J.R.R. Tolkein', 295, false);
+myLibrary.push(defaultBook);
+displaybook(myLibrary[myLibrary.length - 1]);
