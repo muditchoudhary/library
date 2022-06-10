@@ -46,10 +46,10 @@ function getInputTextValues(arrOfInputIds) {
 function checkReadStatus() {
     const isRead = document.querySelector('#read').checked;
     if (isRead === true) {
-        values.push(isRead);
+        values.push('Read');
         return;
     }
-    values.push(isRead);
+    values.push('Not read yet');
 }
 
 function clearInputTextValues(arr) {
@@ -91,6 +91,11 @@ function displaybook(book) {
     for (let key in book) {
         spans[j].classList.add(spanClasess[j]);
         spans[j].textContent = book[key];
+        // If statement for adding click event on
+        // status span elmement. To change status
+        if (spans[j].className === 'status') {
+            spans[j].addEventListener('click', toggleReadStaus);
+        }
         j++;
     }
 
@@ -118,8 +123,8 @@ function hideInputForm() {
 }
 
 function removeBook(e) {
-    const bookDataAttributeIndex = e.path[1].getAttribute('data-index');
-    const bookRow = e.path[1];
+    const bookDataAttributeIndex = e.composedPath()[1].getAttribute('data-index');
+    const bookRow = e.composedPath()[1];
     bookRow.remove();
 
     myLibrary.splice(parseInt(bookDataAttributeIndex), 1);
@@ -128,14 +133,27 @@ function removeBook(e) {
     // The for loop is for matching data-index value of remaining book divs
     // with the book objects index on myLibrary. 
     // As if a book removes from the middle of an array, book's object index
-    // on myLibrary changed but there corrosponding book div's data-index value
+    // on myLibrary changed but thier corrosponding book div's data-index value
     // doesn't changes
     const bookDivNodes = document.querySelectorAll('.book');
     for (let i = 0; i < bookDivNodes.length; i++) {
         bookDivNodes[i].setAttribute('data-index', `${i}`);
     }
+}
 
-    console.log(myLibrary);
+function toggleReadStaus(e) {
+    bookDataAttributeIndex = e.composedPath()[1].getAttribute('data-index');
+    bookObject = myLibrary[bookDataAttributeIndex];
+    
+    if (bookObject.status.toLowerCase() === 'read') {
+        bookObject.status = 'Not read yet';
+    } else {
+        bookObject.status = 'Read';
+    }
+
+    console.log(e.composedPath());
+    const statusSpan = e.composedPath()[0];
+    statusSpan.innerText = bookObject.status;
 }
 
 
@@ -150,13 +168,10 @@ submitBtn.addEventListener('click', submitForm);
 
 const removeBookBtns = document.querySelectorAll('.remove');
 removeBookBtns.forEach(btn => btn.addEventListener('click', removeBook));
-// Button on book display to change book read status
-// function to change that book object read status
-
 
 const bookInputForm = document.querySelector('.user-input-form');
 const bookShelfBody = document.querySelector('.shelf-body');
 
-const defaultBook = new Book('The Hobbit', 'J.R.R. Tolkein', 295, false);
+const defaultBook = new Book('The Hobbit', 'J.R.R. Tolkein', 295, 'Not read yet');
 myLibrary.push(defaultBook);
 displaybook(myLibrary[myLibrary.length - 1]);
