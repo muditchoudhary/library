@@ -48,11 +48,17 @@ function getInputTextValues(arrOfInputIds) {
 
 function checkReadStatus() {
     const isRead = document.querySelector('#read').checked;
+    const isNotReadYet = document.querySelector('#not-read').checked;
     if (isRead === true) {
         values.push('Read');
         return;
+    } 
+    if (isNotReadYet === true) {
+        values.push('Not read yet');
+        return;
+    } else {
+        values.push('');
     }
-    values.push('Not read yet');
 }
 
 function clearInputTextValues(arr) {
