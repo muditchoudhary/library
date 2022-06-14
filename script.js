@@ -94,7 +94,13 @@ function displaybook(book) {
         // If statement for adding click event on
         // status span elmement. To change status
         if (spans[j].className === 'status') {
-            spans[j].addEventListener('click', toggleReadStaus);
+            const statusSpan = spans[j];
+           statusSpan.addEventListener('click', toggleReadStaus);
+            if (book['status'] === 'Read') {
+                statusSpan.classList.add('read');
+            } else {
+                statusSpan.classList.add('not-read');
+            }
         }
         j++;
     }
@@ -144,15 +150,18 @@ function removeBook(e) {
 function toggleReadStaus(e) {
     bookDataAttributeIndex = e.composedPath()[1].getAttribute('data-index');
     bookObject = myLibrary[bookDataAttributeIndex];
+    const statusSpan = e.composedPath()[0];
     
     if (bookObject.status.toLowerCase() === 'read') {
         bookObject.status = 'Not read yet';
+        statusSpan.classList.remove('read');
+        statusSpan.classList.add('not-read');
     } else {
         bookObject.status = 'Read';
+        statusSpan.classList.remove('not-read');
+        statusSpan.classList.add('read');
     }
 
-    console.log(e.composedPath());
-    const statusSpan = e.composedPath()[0];
     statusSpan.innerText = bookObject.status;
 }
 
