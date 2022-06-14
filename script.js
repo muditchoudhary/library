@@ -24,16 +24,19 @@ function addBookToLibrary() {
     displaybook(myLibrary[myLibrary.length - 1]);
 }
 
-function submitForm() {
+function submitForm(event) {
+    event.preventDefault();
     getInputTextValues(inputFieldIds);
     checkReadStatus();
-    // Clear all the values from input tags
-    // It's temporarly because submitting from reloades
-    //  the page, myLibrary array gets reset.
-    clearInputTextValues(inputFieldIds);
-    clearRadioValues(radioIds);
+    if(!values.includes("")) {
+        addBookToLibrary();
+        hideInputForm()
+    } else {
+        console.log(values);
+        alert('Please fill all fields');
+        values = [];
+    }
 
-    addBookToLibrary();
 }
 
 function getInputTextValues(arrOfInputIds) {
