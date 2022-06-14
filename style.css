@@ -155,8 +155,8 @@ body {
   display: none;
   position: absolute;
   width: 75%;
-  background: beige;
-  border: 4px ridge green;
+  background: #fbe5be;
+  border: 4px ridge black;
   height: 355px;
   border-radius: 20px;
   top: 20%;
@@ -191,6 +191,7 @@ form p:first-child span {
 
 label {
   font-size: 26px;
+  font-weight: 500;
 }
 
 input {
@@ -205,7 +206,7 @@ input {
   grid-template-rows: 1fr 5fr;
   width: 100%;
   height: 100vh;
-  background: #f7f7f7;
+  background: #fbe5be;
   /* border: 15px groove red; */
   /* margin: 10px; */
   /* border-radius: 20px; */
@@ -222,13 +223,14 @@ input {
   font-size: 50px;
   justify-self: center;
   align-self: center;
-  color: #f37c7f;
+  color: #277eac;
 }
 
 .shelf-body {
-  border: 8px groove red;
+  border: 8px groove #fdbf73;
   border-radius: 20px;
   overflow: scroll;
+  background: #277eac;
 }
 
 .shelf-body .row,
@@ -239,6 +241,7 @@ input {
   /* justify-items: center; */
   /* border-right: 1px solid; */
   padding: 10px;
+  color: #fbe5be;
 }
 
 .book .book-icon {
@@ -260,12 +263,8 @@ input {
   width: 45px;
   height: auto;
   cursor: pointer;
-  border: 2px groove green;
+  border: 2px groove #277eac;
   border-radius: 7px;
-}
-
-.add-btn:hover {
-  box-shadow: 3px 3px 10px -1px green, -3px -3px 10px -1px;
 }
 
 .row * {
@@ -282,12 +281,13 @@ input {
 }
 
 .shelf-body .book {
-  border: 1px solid #f37c7f;
+  border: 1px solid #fafdba;
   margin: 16px 10px;
   border-radius: 24px;
-  box-shadow: 12px 18px 14px -12px black;
-  background: #f37c7f;
-  color: #f7f7f7;
+  box-shadow: 12px 18px 14px -12px #000000;
+  background: #fafdba;
+  color: #590a5e;
+  font-weight: 500;
 }
 
 .read {
@@ -328,22 +328,24 @@ input {
 
 form p {
   margin: 12px 9px;
+  color: #277eac;
 }
 
 .submit {
   width: 180px;
   height: 30px;
   border-radius: 20px;
-  border: 2px outset black;
+  border: 2px outset #fafdba;
   margin-top: 10px;
   display: block;
   margin: 22px auto;
   font-size: 19px;
+  background: #590a5e;
 }
 
 .submit:hover {
   width: 190px;
   height: 40px;
-  box-shadow: 3px 3px 7px black;
+  box-shadow: 3px 3px 7px #590a5e;
   cursor: pointer;
 }
